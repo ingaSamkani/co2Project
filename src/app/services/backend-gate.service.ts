@@ -12,9 +12,6 @@ export class BackendGateService {
 
   public getGasResults(submitItem: SubmitItem) {
     const url = 'https://jsonplaceholder.typicode.com/users';
-    const req = new HttpRequest('GET', url, {
-      reportProgress: true
-    });
-    return this.http.request(req);
+    return this.http.get(url);
   }
 }

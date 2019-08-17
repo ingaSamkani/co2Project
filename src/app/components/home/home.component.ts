@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { SubmitItem } from "../../models/models";
-import { BackendGateService } from "../../services/backend-gate.service";
+import {Component, OnInit} from '@angular/core';
+import {SubmitItem} from "../../models/models";
+import {BackendGateService} from "../../services/backend-gate.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   public title: string = 'this is a title!!!';
   public isMenuOpened: boolean = false;
   public isFirstLoad: boolean = true;
+  public showSpinner: boolean = false;
 
-  constructor(private backendGateService: BackendGateService) {}
+  constructor(private backendGateService: BackendGateService) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   public toggleMenu() {
     this.isFirstLoad = false;
@@ -22,11 +25,18 @@ export class HomeComponent implements OnInit{
   }
 
   public onSubmit(submitItem: SubmitItem) {
-      this.backendGateService.getGasResults(submitItem).subscribe((data) => {
+    this.showSpinner = true;
+    this.backendGateService.getGasResults(submitItem).subscribe((data) => {
         console.log("getGasResults - DATA: ", data);
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 1000);
       },
-        (error) => {
-          console.log("getGasResults - ERROR: ", error);
-        })
+      (error) => {
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 1000);
+        console.log("getGasResults - ERROR: ", error);
+      })
   }
 }
