@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {GridCellClickResponse} from "../../models/models";
 
 @Component({
@@ -6,7 +6,7 @@ import {GridCellClickResponse} from "../../models/models";
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnChanges {
   @Input() rows: any[] = [];
   @Input() cols: any[] = [];
   @Input() data: any = {};
@@ -14,7 +14,7 @@ export class GridComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.rows = ['ROWS: ', ...this.rows];
     this.cols = ['COLS: ', ...this.cols];
   }
