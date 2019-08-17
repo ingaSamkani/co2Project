@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SubmitItem} from "../../models/models";
+import {CheckItem, Mainland, SubmitItem} from "../../models/models";
 import {BackendGateService} from "../../services/backend-gate.service";
 
 @Component({
@@ -11,9 +11,13 @@ export class HomeComponent implements OnInit {
   public title: string = 'this is a title!!!';
   public isMenuOpened: boolean = false;
   public isFirstLoad: boolean = true;
-  public showSpinner: boolean = false;
+  public showSpinner: number = 0;
+  public gasList: CheckItem[] = [];
+  private statesList: Mainland[] = [];
 
   constructor(private backendGateService: BackendGateService) {
+    this.loadGasList();
+    this.loadStateList();
   }
 
   ngOnInit() {
@@ -24,17 +28,39 @@ export class HomeComponent implements OnInit {
     this.isMenuOpened = !this.isMenuOpened;
   }
 
+  private loadGasList() {
+    this.showSpinner++;
+    this.backendGateService.getGasesTypes().subscribe((data) => {
+      this.gasList = data as CheckItem[];
+      this.showSpinner--;
+    },
+      err => {
+        this.showSpinner--;
+      });
+  }
+
+  private loadStateList() {
+    this.showSpinner++;
+    this.backendGateService.getStates().subscribe((data) => {
+      this.statesList = data as Mainland[];
+      this.showSpinner--;
+    },
+      err => {
+        this.showSpinner--;
+      });
+  }
+
   public onSubmit(submitItem: SubmitItem) {
-    this.showSpinner = true;
+    this.showSpinner++;
     this.backendGateService.getGasResults(submitItem).subscribe((data) => {
         console.log("getGasResults - DATA: ", data);
         setTimeout(() => {
-          this.showSpinner = false;
+          this.showSpinner--;
         }, 1000);
       },
       (error) => {
         setTimeout(() => {
-          this.showSpinner = false;
+          this.showSpinner--;
         }, 1000);
         console.log("getGasResults - ERROR: ", error);
       })

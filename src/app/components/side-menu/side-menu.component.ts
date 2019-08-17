@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {CheckItem, Mainland, SelectedTime, SubmitItem} from "../../models/models";
 
@@ -9,7 +9,8 @@ import {CheckItem, Mainland, SelectedTime, SubmitItem} from "../../models/models
 })
 export class SideMenuComponent implements OnInit {
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<any>();
-
+  @Input() gasListResponse: CheckItem[] = [];
+  @Input() stateListResponse: Mainland[] = [];
   private gasList: CheckItem[] = [];
   private mainlandsList: Mainland[] = [];
   public last20Years: number[] = [];
@@ -23,8 +24,8 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setGasList(mockGas);
-    this.setStates(mockList)
+    this.setGasList(this.gasListResponse);
+    this.setStates(this.stateListResponse)
   }
 
   private setYearsSelection() {
@@ -141,86 +142,3 @@ export class SideMenuComponent implements OnInit {
   }
 
 }
-
-
-const mockGas = [{name: 'co2'}, {name: 'c2o'}, {name: 'other'}];
-
-const Africa = [
-  {
-    name: 'nigeria'
-  },
-  {
-    name: 'chad'
-  },
-  {
-    name: 'egypt'
-  }
-];
-
-const America = [
-  {
-    name: 'U.S.A'
-  },
-  {
-    name: 'canada'
-  },
-  {
-    name: 'brazil'
-  }
-];
-
-const Europe = [
-  {
-    name: 'france'
-  },
-  {
-    name: 'belgium'
-  },
-  {
-    name: 'swiss'
-  }
-];
-
-const Australia = [
-  {
-    name: 'australia'
-  }
-];
-
-
-const Asia = [
-  {
-    name: 'thailand'
-  },
-  {
-    name: 'china'
-  },
-  {
-    name: 'mongolia'
-  }
-];
-
-const mockList: Mainland[] = [
-  {
-    name: 'africa',
-    states: Africa
-  },
-  {
-    name: 'america',
-    states: America
-  },
-  {
-    name: 'europe',
-    states: Europe
-  },
-  {
-    name: 'australia',
-    states: Australia
-  },
-  {
-    name: 'asia',
-    states: Asia
-  },
-];
-
-

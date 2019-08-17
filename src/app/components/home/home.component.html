@@ -4,11 +4,13 @@
   </app-header-component>
   <app-side-menu class="app-side-menu"
                  *ngIf="!isFirstLoad"
-                 (onSubmit)="onSubmit()"
+                 (onSubmit)="onSubmit($event)"
+                 [gasListResponse]="gasList"
+                 [stateListResponse]="statesList"
                   [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
                               'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
   <app-result-component></app-result-component>
 </div>
-<div class="spinner" *ngIf="showSpinner">
+<div class="spinner" *ngIf="showSpinner > 0">
   <mat-spinner></mat-spinner>
 </div>
