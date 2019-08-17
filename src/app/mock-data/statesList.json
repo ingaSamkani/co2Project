@@ -1,0 +1,66 @@
+[
+  {
+    "name": "africa",
+    "states": [
+      {
+        "name": "nigeria"
+      },
+      {
+        "name": "chad"
+      },
+      {
+        "name": "egypt"
+      }
+    ]
+  },
+  {
+    "name": "america",
+    "states": [
+      {
+        "name": "U.S.A"
+      },
+      {
+        "name": "canada"
+      },
+      {
+        "name": "brazil"
+      }
+    ]
+  },
+  {
+    "name": "europe",
+    "states": [
+      {
+        "name": "france"
+      },
+      {
+        "name": "belgium"
+      },
+      {
+        "name": "swiss"
+      }
+    ]
+  },
+  {
+    "name": "australia",
+    "states": [
+      {
+        "name": "australia"
+      }
+    ]
+  },
+  {
+    "name": "asia",
+    "states": [
+      {
+        "name": "thailand"
+      },
+      {
+        "name": "china"
+      },
+      {
+        "name": "mongolia"
+      }
+    ]
+  }
+]

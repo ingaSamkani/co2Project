@@ -10,13 +10,14 @@ import {
   MatDialogModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatInputModule, MatNativeDateModule, MatSliderModule, MatSelectModule, MatProgressSpinnerModule
+  MatInputModule, MatNativeDateModule, MatSliderModule, MatSelectModule, MatProgressSpinnerModule, MatGridListModule
 } from "@angular/material";
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { HeaderComponentComponent } from './components/header-component/header-component.component';
 import { ResultComponentComponent } from './components/result-component/result-component.component';
 import { HttpClientModule } from "@angular/common/http";
 import { TimeSelectorComponent } from './components/time-selector/time-selector.component';
+import { GridComponent } from './components/grid/grid.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TimeSelectorComponent } from './components/time-selector/time-selector.
     SideMenuComponent,
     HeaderComponentComponent,
     ResultComponentComponent,
-    TimeSelectorComponent
+    TimeSelectorComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { TimeSelectorComponent } from './components/time-selector/time-selector.
     BrowserAnimationsModule,
     MatSliderModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
   entryComponents: [
     TimeSelectorComponent

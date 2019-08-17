@@ -23,8 +23,6 @@ export type SubmitItem = {
 }
 
 /*
-
-
 const mockGas = [{name: 'co2'}, {name: 'c2o'}, {name: 'other'}];
 
 const Africa = [

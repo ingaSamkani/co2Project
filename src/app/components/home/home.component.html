@@ -1,6 +1,9 @@
 <div class="home-component-wrapper">
   <app-header-component class="app-header-component" [title]="title"
-                        (onMenuClick)="toggleMenu()">
+                        (onMenuClick)="toggleMenu()"
+                        (onNavClick)="onNavClicked($event)"
+                        [backEnabled]="currentView > 0"
+                        [forwardEnabled]="currentView < queryResults.length && currentView > -1">
   </app-header-component>
   <app-side-menu class="app-side-menu"
                  *ngIf="!isFirstLoad"
@@ -9,7 +12,8 @@
                  [stateListResponse]="statesList"
                   [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
                               'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
-  <app-result-component></app-result-component>
+  <app-result-component [queryData]="queryResults[currentView]"
+                        (onGeneralClick)="closeMenu()"></app-result-component>
 </div>
 <div class="spinner" *ngIf="showSpinner > 0">
   <mat-spinner></mat-spinner>

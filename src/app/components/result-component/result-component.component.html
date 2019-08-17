@@ -1,1 +1,15 @@
-<p>result-component works!</p>
+<div class="result-page-wrapper" *ngIf="queryData" (click)="onPageClick()">
+  <!--{{queryData | json}}-->
+  <div class="grid">
+    <!--<div class="rows" *ngFor="let state of states">
+      {{state}}
+    </div>-->
+    <!--<mat-grid-list cols="{{states.length + 1}}" rowHeight="100px">
+      <mat-grid-tile-header>XXX</mat-grid-tile-header>
+      <mat-grid-tile [style.background]="'pink'" *ngFor="let state of states">
+        {{state}}
+      </mat-grid-tile>
+    </mat-grid-list>-->
+    <app-grid [cols]="years" [rows]="states" [data]="queryData"></app-grid>
+  </div>
+</div>

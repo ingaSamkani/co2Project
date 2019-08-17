@@ -111,12 +111,14 @@ export class SideMenuComponent implements OnInit {
       gases: [],
       states: [],
       timeSelection: this.selectedTime
-    }
+    };
+
     this.gasList.forEach((g: CheckItem) => {
       if (g.isChecked) {
         submitItem.gases.push(g.name);
       }
     });
+
     this.mainlandsList.forEach((m: Mainland) => {
       m.states.forEach((s: CheckItem) => {
         if (s.isChecked) {

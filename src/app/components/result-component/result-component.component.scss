@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+.result-page-wrapper {
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: scroll;
+
+  .grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: $header-height;
+  }
+}

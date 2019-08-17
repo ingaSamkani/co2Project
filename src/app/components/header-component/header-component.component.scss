@@ -10,6 +10,7 @@
   justify-content: center;
   font-size: 25px;
   text-transform: capitalize;
+  position: relative;
   .menuIcon {
     position: absolute;
     left: $standard-distance;
@@ -19,5 +20,28 @@
 
   .titleText {
     font-weight: 500;
+  }
+
+  .navigators {
+    position: absolute;
+    right: $standard-distance;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 75px;
+    justify-content: space-between;
+    cursor: default;
+
+    .navIcon {
+      &_back {
+        position: absolute;
+        left: 0;
+      }
+      &_forward {
+        position: absolute;
+        right: 0;
+      }
+    }
   }
 }

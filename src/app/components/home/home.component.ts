@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
   public isFirstLoad: boolean = true;
   public showSpinner: number = 0;
   public gasList: CheckItem[] = [];
+  public queryResults: any[] = [];
+  private navStack: number[] = [];
+  private currentView: number = -1;
   private statesList: Mainland[] = [];
 
   constructor(private backendGateService: BackendGateService) {
@@ -31,9 +34,9 @@ export class HomeComponent implements OnInit {
   private loadGasList() {
     this.showSpinner++;
     this.backendGateService.getGasesTypes().subscribe((data) => {
-      this.gasList = data as CheckItem[];
-      this.showSpinner--;
-    },
+        this.gasList = data as CheckItem[];
+        this.showSpinner--;
+      },
       err => {
         this.showSpinner--;
       });
@@ -42,9 +45,9 @@ export class HomeComponent implements OnInit {
   private loadStateList() {
     this.showSpinner++;
     this.backendGateService.getStates().subscribe((data) => {
-      this.statesList = data as Mainland[];
-      this.showSpinner--;
-    },
+        this.statesList = data as Mainland[];
+        this.showSpinner--;
+      },
       err => {
         this.showSpinner--;
       });
@@ -52,17 +55,31 @@ export class HomeComponent implements OnInit {
 
   public onSubmit(submitItem: SubmitItem) {
     this.showSpinner++;
+    this.isMenuOpened = false;
     this.backendGateService.getGasResults(submitItem).subscribe((data) => {
+        this.queryResults.push(data);
+        this.currentView++;
+        this.navStack.push(this.currentView);
+        this.navStack = this.navStack.slice(0, this.currentView + 1);
         console.log("getGasResults - DATA: ", data);
-        setTimeout(() => {
-          this.showSpinner--;
-        }, 1000);
+        this.showSpinner--;
       },
       (error) => {
-        setTimeout(() => {
-          this.showSpinner--;
-        }, 1000);
+        this.showSpinner--;
         console.log("getGasResults - ERROR: ", error);
       })
+  }
+
+  public closeMenu() {
+    this.isMenuOpened = false;
+  }
+
+  public onNavClicked(isBack: boolean) {
+    if (isBack) {
+      this.currentView--
+      return;
+    }
+    this.currentView++;
+
   }
 }
