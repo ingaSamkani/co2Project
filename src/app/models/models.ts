@@ -22,6 +22,11 @@ export type SubmitItem = {
   timeSelection: SelectedTime
 }
 
+export type GridCellClickResponse = {
+  col: number | string,
+  row: number | string,
+  data: any
+}
 /*
 const mockGas = [{name: 'co2'}, {name: 'c2o'}, {name: 'other'}];
 

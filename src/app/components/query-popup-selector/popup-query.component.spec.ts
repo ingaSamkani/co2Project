@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeSelectorComponent } from './time-selector.component';
+import { PopupQueryComponent } from './popup-query.component';
 
 describe('TimeSelectorComponent', () => {
-  let component: TimeSelectorComponent;
-  let fixture: ComponentFixture<TimeSelectorComponent>;
+  let component: PopupQueryComponent;
+  let fixture: ComponentFixture<PopupQueryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeSelectorComponent ]
+      declarations: [ PopupQueryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TimeSelectorComponent);
+    fixture = TestBed.createComponent(PopupQueryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

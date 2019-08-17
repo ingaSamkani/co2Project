@@ -1,6 +1,7 @@
 <div class="grid-rows" *ngFor="let row of rows; let i = index">
   <div class="grid-cols" *ngFor="let col of cols; let j = index"
-       [ngClass]="{'title': j === 0 || i === 0}">
+       [ngClass]="{'title': j === 0 || i === 0}"
+        (click)="onCellClicked(i,j)">
     <!--{{'('+i+','+j+')'}}-->
     <span *ngIf="i === 0 && j === 0"> </span>
     <span *ngIf="i !== 0 && j === 0">{{rows[i]}}</span>

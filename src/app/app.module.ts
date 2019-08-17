@@ -16,7 +16,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { HeaderComponentComponent } from './components/header-component/header-component.component';
 import { ResultComponentComponent } from './components/result-component/result-component.component';
 import { HttpClientModule } from "@angular/common/http";
-import { TimeSelectorComponent } from './components/time-selector/time-selector.component';
+import { PopupQueryComponent } from './components/query-popup-selector/popup-query.component';
 import { GridComponent } from './components/grid/grid.component';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { GridComponent } from './components/grid/grid.component';
     SideMenuComponent,
     HeaderComponentComponent,
     ResultComponentComponent,
-    TimeSelectorComponent,
+    PopupQueryComponent,
     GridComponent
   ],
   imports: [
@@ -48,7 +48,7 @@ import { GridComponent } from './components/grid/grid.component';
     MatGridListModule
   ],
   entryComponents: [
-    TimeSelectorComponent
+    PopupQueryComponent
   ],
   exports: [
     MatDatepickerModule,

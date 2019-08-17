@@ -82,4 +82,8 @@ export class HomeComponent implements OnInit {
     this.currentView++;
 
   }
+
+  public onRequestForQuery() {
+
+  }
 }

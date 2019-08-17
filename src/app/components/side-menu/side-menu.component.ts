@@ -19,7 +19,7 @@ export class SideMenuComponent implements OnInit {
   private selectedTime: SelectedTime;
 
 
-  constructor(private dialog: MatDialog,) {
+  constructor() {
     this.setYearsSelection();
   }
 
@@ -127,14 +127,10 @@ export class SideMenuComponent implements OnInit {
       });
     });
     this.onSubmit.emit(submitItem);
-    console.log("SUBMIT: ", submitItem); //this will be sent to the BE
+    console.log("SUBMIT: ", submitItem);
   }
 
   public onFromYearSelectionChanged() {
-    //const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true;
-    //dialogConfig.autoFocus = true;
-    //this.dialog.open(TimeSelectorComponent, dialogConfig);
     this.toYearsOptions = this.last20Years.filter(year => {if (year <= this.selectedTime.from) return year});
     this.selectedTime.to = (this.selectedTime.to > this.selectedTime.from) ?  this.selectedTime.from : this.selectedTime.to;
   }

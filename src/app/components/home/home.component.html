@@ -13,7 +13,8 @@
                   [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
                               'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
   <app-result-component [queryData]="queryResults[currentView]"
-                        (onGeneralClick)="closeMenu()"></app-result-component>
+                        (onGeneralClick)="closeMenu()"
+                        (onRequestForQuery)="onRequestForQuery()"></app-result-component>
 </div>
 <div class="spinner" *ngIf="showSpinner > 0">
   <mat-spinner></mat-spinner>
