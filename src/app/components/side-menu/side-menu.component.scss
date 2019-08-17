@@ -5,23 +5,14 @@
   padding: $standard-distance 0 $standard-distance 0;
 
   .selectedYears {
+    padding: $standard-distance 0 0 $standard-distance;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    margin: $standard-distance;
-    height: 50px;
-    background-color: $general-background;
-    border: 0.1px solid $main-background;
-    position: relative;
-
-    .editIcon {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      font-size: 16px;
-      cursor: default;
-      color: $main-background;
+    justify-content: space-between;
+    width: 140px;
+    .yearSelector {
+      width: 60px;
     }
   }
 

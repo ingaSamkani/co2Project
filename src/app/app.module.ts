@@ -10,7 +10,7 @@ import {
   MatDialogModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatInputModule, MatNativeDateModule, MatSliderModule
+  MatInputModule, MatNativeDateModule, MatSliderModule, MatSelectModule
 } from "@angular/material";
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { HeaderComponentComponent } from './components/header-component/header-component.component';
@@ -40,7 +40,8 @@ import { TimeSelectorComponent } from './components/time-selector/time-selector.
     MatNativeDateModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSelectModule
   ],
   entryComponents: [
     TimeSelectorComponent

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import {TimeSelectorComponent} from "../time-selector/time-selector.component";
+import {CheckItem, Mainland, SelectedTime, SubmitItem} from "../../models/models";
 
 @Component({
   selector: 'app-side-menu',
@@ -8,17 +8,33 @@ import {TimeSelectorComponent} from "../time-selector/time-selector.component";
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter<any>();
+
   private gasList: CheckItem[] = [];
   private mainlandsList: Mainland[] = [];
+  public last20Years: number[] = [];
+  public fromYearsOptions: number[] = [];
+  public toYearsOptions: number[] = [];
   private selectedTime: SelectedTime;
 
-  constructor(private dialog: MatDialog) {
-    this.selectedTime = {from: new Date().getFullYear()}
+
+  constructor(private dialog: MatDialog,) {
+    this.setYearsSelection();
   }
 
   ngOnInit() {
     this.setGasList(mockGas);
     this.setStates(mockList)
+  }
+
+  private setYearsSelection() {
+    const thisYear: number = new Date().getFullYear();
+    this.selectedTime = {from: thisYear, to: thisYear}
+    for (let i = thisYear; i >= (thisYear - 20); i--) {
+      this.last20Years.push(i);
+      this.toYearsOptions.push(i);
+      this.fromYearsOptions.push(i);
+    }
   }
 
   private setGasList(list: CheckItem[]) {
@@ -75,6 +91,7 @@ export class SideMenuComponent implements OnInit {
   public onClearAllClicked() {
     this.clearGas();
     this.clearStateSelection();
+    this.setYearsSelection();
   }
 
   private clearGas() {
@@ -88,10 +105,11 @@ export class SideMenuComponent implements OnInit {
     });
   }
 
-  public onSubmitclicked() {
-    const submitItem = {
+  public onSubmitClicked() {
+    const submitItem: SubmitItem = {
       gases: [],
-      states: []
+      states: [],
+      timeSelection: this.selectedTime
     }
     this.gasList.forEach((g: CheckItem) => {
       if (g.isChecked) {
@@ -105,16 +123,21 @@ export class SideMenuComponent implements OnInit {
         }
       });
     });
+    this.onSubmit.emit(submitItem);
     console.log("SUBMIT: ", submitItem); //this will be sent to the BE
   }
 
-  public onEditYearsClicked() {
-    const dialogConfig = new MatDialogConfig();
-
+  public onFromYearSelectionChanged() {
+    //const dialogConfig = new MatDialogConfig();
     //dialogConfig.disableClose = true;
     //dialogConfig.autoFocus = true;
+    //this.dialog.open(TimeSelectorComponent, dialogConfig);
+    this.toYearsOptions = this.last20Years.filter(year => {if (year <= this.selectedTime.from) return year});
+    this.selectedTime.to = (this.selectedTime.to > this.selectedTime.from) ?  this.selectedTime.from : this.selectedTime.to;
+  }
 
-    this.dialog.open(TimeSelectorComponent, dialogConfig);
+  public onToYearSelectionChanged() {
+    this.fromYearsOptions = this.last20Years.filter(year => {if (year >= this.selectedTime.to) return year})
   }
 
 }
@@ -200,21 +223,4 @@ const mockList: Mainland[] = [
   },
 ];
 
-export type Mainland = {
-  name: string,
-  states: CheckItem[],
-  isChecked?: boolean,
-  isExpand?: boolean,
-}
 
-
-export type CheckItem = {
-  name: string,
-  parentName?: string,
-  isChecked?: boolean
-}
-
-export type SelectedTime = {
-  from: number,
-  to?: number
-}
