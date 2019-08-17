@@ -1,0 +1,36 @@
+<div class="side-menu-wrapper">
+  <div class="action-buttons">
+    <div class="button-main"(click)="onSubmitclicked()" >submit <i class="material-icons md-dark menuIcon">send</i></div>
+    <div class="button-secondary" (click)="onClearAllClicked()">clear all <i class="material-icons md-dark menuIcon">clear_all</i></div>
+  </div>
+  <div class="selectedYears">
+    <mat-slider [min]="1980" max="2019"></mat-slider>
+   <!-- <i class="material-icons md-dark editIcon" title="edit" (click)="onEditYearsClicked()">edit</i>
+    <label>{{selectedTime.from}}  {{selectedTime.to ? ' - ' + selectedTime.to : ''}}</label> -->
+  </div>
+  <div class="gas-list">
+      <mat-checkbox *ngFor="let gas of gasList"
+                    [labelPosition]="'after'"
+                    [value]="gas.name"
+                    [checked]="gas.isChecked"
+                    (change)="onGasCheckboxClicked(gas)">{{gas.name}}</mat-checkbox>
+  </div>
+  <div class="mainlands-list">
+      <div class="mainlandItem" *ngFor="let mainland of mainlandsList">
+        <div class="mainlandContent">
+          <mat-checkbox [labelPosition]="'after'"
+                        [value]="mainland.name"
+                        [checked]="mainland.isChecked"
+                        (change)="onMainlandClicked(mainland)">{{mainland.name}}</mat-checkbox>
+          <i class="material-icons md-dark menuIcon" (click)="toggleExpand(mainland)">{{mainland.isExpand ? 'expand_less': 'expand_more'}}</i>
+        </div>
+        <div class="states" *ngIf="mainland.isExpand">
+          <mat-checkbox *ngFor="let state of mainland.states"
+                        [labelPosition]="'after'"
+                        [value]="state.name"
+                        [checked]="state.isChecked"
+                        (change)="onStateClicked(state)">{{state.name}}</mat-checkbox>
+        </div>
+      </div>
+  </div>
+</div>

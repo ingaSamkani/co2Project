@@ -1,0 +1,10 @@
+<div class="home-component-wrapper">
+  <app-header-component class="app-header-component" [title]="title"
+                        (onMenuClick)="toggleMenu()">
+  </app-header-component>
+  <app-side-menu class="app-side-menu"
+                 *ngIf="!isFirstLoad"
+                  [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
+                              'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
+  <app-result-component></app-result-component>
+</div>

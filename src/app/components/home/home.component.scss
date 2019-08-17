@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+@import "../../styles/animations";
+@import "../../styles/global";
+
+.home-component-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: $general-background;
+  .app-side-menu {
+    height: calc(100% - 50px);
+    width: 400px;
+    position: absolute;
+    background: $overlap-general-background;
+  }
+}

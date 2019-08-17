@@ -1,0 +1,27 @@
+@import "./variables";
+
+.button-main {
+  background-color: $main-background;
+  color: $main-font-color;
+  height: 30px;
+  width: 85px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: default;
+
+  i {
+    font-size: 16px;
+  }
+}
+
+.button-secondary {
+  @extend .button-main;
+  background-color: transparent;
+  color: $main-background;
+  border: 1px solid $main-background;
+}

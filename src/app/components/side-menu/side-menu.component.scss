@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+@import "../../styles/global";
+
+.side-menu-wrapper {
+  padding: $standard-distance 0 $standard-distance 0;
+
+  .selectedYears {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: $standard-distance;
+    height: 50px;
+    background-color: $general-background;
+    border: 0.1px solid $main-background;
+    position: relative;
+
+    .editIcon {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      font-size: 16px;
+      cursor: default;
+      color: $main-background;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .gas-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: $standard-distance;
+  }
+
+  .mainlands-list {
+    padding: $standard-distance 0 $standard-distance $standard-distance;
+    text-transform: capitalize;
+
+    .mainlandItem {
+      .mainlandContent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        i {
+          color: $main-background;
+          cursor: default;
+        }
+      }
+
+      .states {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: center;
+        padding-left: $standard-distance;
+      }
+    }
+  }
+}
