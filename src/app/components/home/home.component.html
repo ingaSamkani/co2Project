@@ -1,9 +1,9 @@
 <div class="home-component-wrapper">
-  <app-header-component class="app-header-component" [title]="title"
+  <app-header-component class="app-header-component" [title]="queryResults.length > 0 ?  queryResults[currentView].title : title"
                         (onMenuClick)="toggleMenu()"
                         (onNavClick)="onNavClicked($event)"
                         [backEnabled]="currentView > 0"
-                        [forwardEnabled]="currentView < queryResults.length && currentView > -1">
+                        [forwardEnabled]="currentView < queryResults.length - 1 && currentView > -1">
   </app-header-component>
   <app-side-menu class="app-side-menu"
                  *ngIf="!isFirstLoad"

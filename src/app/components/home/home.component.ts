@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   private navStack: number[] = [];
   private currentView: number = -1;
   private statesList: Mainland[] = [];
+  private queriesCounter: number = 0;
 
   constructor(private backendGateService: BackendGateService) {
     this.loadGasList();
@@ -57,10 +58,12 @@ export class HomeComponent implements OnInit {
     this.showSpinner++;
     this.isMenuOpened = false;
     this.backendGateService.getGasResults(submitItem).subscribe((data) => {
-        this.queryResults.push(data);
+        data.title = `query#${this.queriesCounter++}`;
+        if (this.currentView > -1) {
+          this.queryResults = this.queryResults.slice(0, this.currentView + 1)
+        }
         this.currentView++;
-        this.navStack.push(this.currentView);
-        this.navStack = this.navStack.slice(0, this.currentView + 1);
+        this.queryResults.push(data);
         console.log("getGasResults - DATA: ", data);
         this.showSpinner--;
       },
@@ -76,7 +79,7 @@ export class HomeComponent implements OnInit {
 
   public onNavClicked(isBack: boolean) {
     if (isBack) {
-      this.currentView--
+      this.currentView--;
       return;
     }
     this.currentView++;
