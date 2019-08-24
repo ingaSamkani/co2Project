@@ -64,7 +64,7 @@ export class BackendGateService {
           states.push(s);
           const stateObj = {}
           response[s.name] = stateObj;
-          for (let i = query.timeFrame.to; i < query.timeFrame.from; i++) {
+          for (let i = query.timeFrame.to; i <= query.timeFrame.from; i++) {
             const yearObj = {}
             stateObj[i.toString()] = yearObj;
             query.gases.forEach(g => {
