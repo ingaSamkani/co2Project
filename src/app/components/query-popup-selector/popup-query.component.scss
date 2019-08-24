@@ -1,4 +1,64 @@
+@import "../../styles/variables";
+@import "../../styles/global";
+
+$local-standard-distance: ($standard-distance / 2);
 .query-popup-wrapper {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 500px;
+  position: relative;
+  .header {
+    height: 45px;
+    font-size: 20px;
+    background-color: $main-background;
+    color: $main-font-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: $local-standard-distance;
+    .closeIcon {
+      position: absolute;
+      right: $local-standard-distance;
+      font-size: 25px;
+      cursor: default;
+    }
+  }
+  .body {
+    .disabled {
+      /*opacity: 0.5;*/
+    }
+    padding: $local-standard-distance;
+    .details {
+      margin: 12.5px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 300px;
+      .gas {
+        padding-right: 10px;
+        &.gas-op {
+          width: 30px;
+        }
+      }
+    }
+    .radio-group {
+      margin-left: $standard-distance;
+      .radio-button {
+        padding-right: $local-standard-distance;
+      }
+    }
+  }
+  .submit-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: $local-standard-distance;
+    right: $local-standard-distance;
+    width: 100%;
+    .button-main, .button-secondary {
+      margin-left: $local-standard-distance;
+      text-transform: uppercase;
+    }
+  }
 }

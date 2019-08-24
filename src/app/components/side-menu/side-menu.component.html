@@ -5,24 +5,9 @@
     <div class="button-secondary" (click)="onClearAllClicked()">clear all <i class="material-icons md-dark menuIcon">clear_all</i>
     </div>
   </div>
-  <div class="selectedYears">
-    <label>from: </label>
-    <mat-select class="yearSelector"
-                placeholder="{{selectedTime.from}}"
-                (selectionChange)="onFromYearSelectionChanged()"
-                [(value)]="selectedTime.from">
-      <mat-option *ngFor="let year of fromYearsOptions" [value]="year">{{ year }}</mat-option>
-    </mat-select>
-  </div>
-  <div class="selectedYears">
-    <label>to: </label>
-    <mat-select class="yearSelector"
-                placeholder="{{selectedTime.to}}"
-                (selectionChange)="onToYearSelectionChanged()"
-                [(value)]="selectedTime.to">
-      <mat-option *ngFor="let year of toYearsOptions" [value]="year">{{ year }}</mat-option>
-    </mat-select>
-  </div>
+  <app-time-selector [timeSelectorModel]="timeSelectorModel"
+                     [rangeList]="yearsList">
+  </app-time-selector>
   <div class="gas-list">
     <mat-checkbox *ngFor="let gas of gasList"
                   [labelPosition]="'after'"
@@ -36,7 +21,8 @@
         <mat-checkbox [labelPosition]="'after'"
                       [value]="mainland.name"
                       [checked]="mainland.isChecked"
-                      (change)="onMainlandClicked(mainland)">{{mainland.name}}</mat-checkbox>
+                      (change)="onMainlandClicked(mainland)">{{mainland.name}}
+        </mat-checkbox>
         <i class="material-icons md-dark menuIcon"
            (click)="toggleExpand(mainland)">{{mainland.isExpand ? 'expand_less' : 'expand_more'}}</i>
       </div>
@@ -45,7 +31,8 @@
                       [labelPosition]="'after'"
                       [value]="state.name"
                       [checked]="state.isChecked"
-                      (change)="onStateClicked(state)">{{state.name}}</mat-checkbox>
+                      (change)="onStateClicked(state)">{{state.name}}
+        </mat-checkbox>
       </div>
     </div>
   </div>

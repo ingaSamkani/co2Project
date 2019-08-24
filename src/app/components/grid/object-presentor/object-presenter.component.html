@@ -1,0 +1,8 @@
+<div class="object-presenter-wrapper">
+  <div class="data" *ngFor="let key of keys">
+    <div *ngIf="obj[key.name]">
+      <span class="key">{{key.name}}: </span>
+      <span class="value">{{obj[key.name]}}</span>
+    </div>
+  </div>
+</div>

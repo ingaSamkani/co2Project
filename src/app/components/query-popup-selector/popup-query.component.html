@@ -1,4 +1,37 @@
 <div class="query-popup-wrapper">
+  <div class="header">
+    <span>complex query</span>
+    <i class="material-icons md-dark closeIcon" (click)="onCancelClicked()">close</i>
+  </div>
+  <div class="body">
+    <div *ngFor="let gas of gases; let gas_i = index">
+      <div class="details">
+        <mat-checkbox [labelPosition]="'after'"
+                      [value]="gas.value"
+                      [checked]="gas.isChecked"
+                      (change)="onGasCheckStatusChanged(gas, gas_i)">
+          <div class="gas gas-name">{{gas.name}}</div>
+        </mat-checkbox>
+        <mat-select class="gas gas-op"
+                    placeholder="{{gas.operator | operator}}"
+                    [(value)]="gas.operator">
+          <mat-option *ngFor="let op of operators" [value]="op">{{ op | operator }}</mat-option>
+        </mat-select>
+        <div class="gas gas-value">{{gas.value}}</div>
+      </div>
+      <mat-radio-group *ngIf="gas_i < showConnector" class="radio-group" [disabled]="!gas.isChecked" (change)="onGasConnectorChanged($event, gas)">
+        <mat-radio-button class="radio-button" *ngFor="let connector of connectors; let connector_i = index"
+                          value="{{connector}}" [checked]="connector_i === 0">{{connector}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <app-time-selector [timeSelectorModel]="timeSelectorModel"
+                       [rangeList]="yearsList">
+    </app-time-selector>
+  </div>
+  <div class="submit-buttons">
+    <div class="button-main" (click)="onSubmitClicked()">submit</div>
+    <div class="button-secondary" (click)="onCancelClicked()">cancel</div>
+  </div>
 
 </div>
 

@@ -27,84 +27,39 @@ export type GridCellClickResponse = {
   row: number | string,
   data: any
 }
-/*
-const mockGas = [{name: 'co2'}, {name: 'c2o'}, {name: 'other'}];
 
-const Africa = [
-  {
-    name: 'nigeria'
-  },
-  {
-    name: 'chad'
-  },
-  {
-    name: 'egypt'
+export type QueryPopupModel = {
+  state: string | number,
+  year: string | number,
+  gasList: {[key: string]: string | number},
+}
+
+
+export type TimeSelectorModel = {
+  from: FromToModel
+  to: FromToModel
+}
+
+type FromToModel = {
+  list: number[],
+  value: number
+}
+export type Query = {
+  name: string,
+  value: number | string,
+  operator: Operator,
+  connector?: Connector,
+  isChecked: boolean,
+  index: number
+}
+
+export type Operator = 'gt'| 'lt' | 'eq';
+export type Connector = 'and'| 'or';
+
+export type ComplexQuery = {
+  gases: Query[],
+  timeFrame: {
+    from: number,
+    to: number
   }
-];
-
-const America = [
-  {
-    name: 'U.S.A'
-  },
-  {
-    name: 'canada'
-  },
-  {
-    name: 'brazil'
-  }
-];
-
-const Europe = [
-  {
-    name: 'france'
-  },
-  {
-    name: 'belgium'
-  },
-  {
-    name: 'swiss'
-  }
-];
-
-const Australia = [
-  {
-    name: 'australia'
-  }
-];
-
-
-const Asia = [
-  {
-    name: 'thailand'
-  },
-  {
-    name: 'china'
-  },
-  {
-    name: 'mongolia'
-  }
-];
-
-const mockList: Mainland[] = [
-  {
-    name: 'africa',
-    states: Africa
-  },
-  {
-    name: 'america',
-    states: America
-  },
-  {
-    name: 'europe',
-    states: Europe
-  },
-  {
-    name: 'australia',
-    states: Australia
-  },
-  {
-    name: 'asia',
-    states: Asia
-  },
-];
-*/
+}

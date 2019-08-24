@@ -10,6 +10,7 @@ export class GridComponent implements OnChanges {
   @Input() rows: any[] = [];
   @Input() cols: any[] = [];
   @Input() data: any = {};
+  @Input() dataKeys: any[];
   @Output() cellClicked: EventEmitter<GridCellClickResponse> = new EventEmitter<GridCellClickResponse>();
 
   constructor() {}
@@ -27,7 +28,7 @@ export class GridComponent implements OnChanges {
       col: rowVal,
       row: colVal,
       data: this.data[rowVal][colVal]
-    }
+    };
     this.cellClicked.emit(response);
   }
 

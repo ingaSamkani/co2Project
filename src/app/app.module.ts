@@ -18,6 +18,9 @@ import { ResultComponentComponent } from './components/result-component/result-c
 import { HttpClientModule } from "@angular/common/http";
 import { PopupQueryComponent } from './components/query-popup-selector/popup-query.component';
 import { GridComponent } from './components/grid/grid.component';
+import { TimeSelectorComponent } from './components/time-selector/time-selector.component';
+import { ObjectPresenterComponent } from './components/grid/object-presentor/object-presenter.component';
+import { OperatorPipe } from './pipes/operator.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { GridComponent } from './components/grid/grid.component';
     HeaderComponentComponent,
     ResultComponentComponent,
     PopupQueryComponent,
-    GridComponent
+    GridComponent,
+    TimeSelectorComponent,
+    ObjectPresenterComponent,
+    OperatorPipe
   ],
   imports: [
     BrowserModule,

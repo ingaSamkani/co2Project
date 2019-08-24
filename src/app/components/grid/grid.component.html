@@ -6,6 +6,10 @@
     <span *ngIf="i === 0 && j === 0"> </span>
     <span *ngIf="i !== 0 && j === 0">{{rows[i]}}</span>
     <span *ngIf="i === 0 && j !== 0">{{cols[j]}}</span>
-    <span *ngIf="i !== 0 && j !== 0">{{data[row][col] | json}}</span>
+    <object-presenter *ngIf="i !== 0 && j !== 0"
+                      [obj]="data[row][col]"
+                      [keys]="dataKeys">
+    </object-presenter>
+    <!--<span *ngIf="i !== 0 && j !== 0">{{data[row][col] | json}}</span>-->
   </div>
 </div>

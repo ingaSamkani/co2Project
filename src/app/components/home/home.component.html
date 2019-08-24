@@ -10,11 +10,13 @@
                  (onSubmit)="onSubmit($event)"
                  [gasListResponse]="gasList"
                  [stateListResponse]="statesList"
-                  [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
+                 [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
                               'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
-  <app-result-component [queryData]="queryResults[currentView]"
+  <app-result-component [queryData]="queryResults.length > 0 && queryResults[currentView].data"
+                        [dataKeys]="gasList"
                         (onGeneralClick)="closeMenu()"
-                        (onRequestForQuery)="onRequestForQuery()"></app-result-component>
+                        (onRequestForQuery)="onRequestForQuery($event)">
+  </app-result-component>
 </div>
 <div class="spinner" *ngIf="showSpinner > 0">
   <mat-spinner></mat-spinner>

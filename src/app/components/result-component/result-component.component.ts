@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {GridCellClickResponse} from "../../models/models";
+import {GridCellClickResponse, QueryPopupModel} from "../../models/models";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {PopupQueryComponent} from "../query-popup-selector/popup-query.component";
 
@@ -10,16 +10,18 @@ import {PopupQueryComponent} from "../query-popup-selector/popup-query.component
 })
 export class ResultComponentComponent implements OnChanges {
   @Input() queryData: any;
+  @Input() dataKeys: any[];
   @Output() onGeneralClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() onRequestForQuery: EventEmitter<any> = new EventEmitter<any>();
 
   public states: string[];
   public years: string[];
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.parseQueryData()
-    console.log('ResultComponentComponent - ngOnChanges: ', changes);
+    this.parseQueryData();
   }
 
   private parseQueryData() {
@@ -35,11 +37,18 @@ export class ResultComponentComponent implements OnChanges {
   }
 
   public onGridItemClicked(cell: GridCellClickResponse) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(PopupQueryComponent, dialogConfig);
-    this.onRequestForQuery.emit(cell);
+    const queryPopupModel: QueryPopupModel = {
+      state: cell.row,
+      year: cell.col,
+      gasList: cell.data
+    }
+    const dialogRef = this.dialog.open(PopupQueryComponent, {data: queryPopupModel});
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.submitted) {
+        this.onRequestForQuery.emit(data.query);
+      }
+      console.log("DATA:", data);
+    });
   }
 
 }

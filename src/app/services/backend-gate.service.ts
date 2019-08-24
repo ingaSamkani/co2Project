@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {SubmitItem} from "../models/models";
+import {ComplexQuery, SubmitItem} from "../models/models";
 import {HttpClient, HttpRequest} from "@angular/common/http";
 
 @Injectable({
@@ -53,6 +53,43 @@ export class BackendGateService {
       eventEmiter.emit(gasList);
     }, 3000);
     return eventEmiter
+  }
+
+  public complexQuery(query: ComplexQuery) {
+    const response = {}
+    const states = [];
+    stateList.forEach(m => {
+      m.states.forEach(s => {
+        if (Math.random() * 3 < 2) {
+          states.push(s);
+          const stateObj = {}
+          response[s.name] = stateObj;
+          for (let i = query.timeFrame.to; i < query.timeFrame.from; i++) {
+            const yearObj = {}
+            stateObj[i.toString()] = yearObj;
+            query.gases.forEach(g => {
+              const gasObj = {};
+              if (g.operator == "eq") {
+                yearObj[g.name] = g.value;
+              }
+              if (g.operator == "lt") {
+                yearObj[g.name] = Math.round(Math.random() * Number(g.value));
+              }
+              if (g.operator == "gt") {
+                yearObj[g.name] = Math.round(Math.random() * Number(g.value)) + Number(g.value);
+              }
+            })
+          }
+        }
+      });
+    });
+    const eventEmiter: EventEmitter<any> = new EventEmitter<any>();
+    setTimeout(() => {
+      eventEmiter.emit(response);
+    }, 1000);
+    return eventEmiter
+
+
   }
 }
 

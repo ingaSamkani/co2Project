@@ -3,6 +3,7 @@
     <app-grid [cols]="years"
               [rows]="states"
               [data]="queryData"
+              [dataKeys]="dataKeys"
               (cellClicked)="onGridItemClicked($event)"></app-grid>
   </div>
 </div>

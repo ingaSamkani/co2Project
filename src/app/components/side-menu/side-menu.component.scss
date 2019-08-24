@@ -4,18 +4,6 @@
 .side-menu-wrapper {
   padding: $standard-distance 0 $standard-distance 0;
 
-  .selectedYears {
-    padding: $standard-distance 0 0 $standard-distance;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 140px;
-    .yearSelector {
-      width: 60px;
-    }
-  }
-
   .action-buttons {
     display: flex;
     flex-direction: row;

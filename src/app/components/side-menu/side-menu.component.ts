@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import {CheckItem, Mainland, SelectedTime, SubmitItem} from "../../models/models";
+import {CheckItem, Mainland, SelectedTime, SubmitItem, TimeSelectorModel} from "../../models/models";
+import {YEARS_BACK} from "../../consts/consts";
+import {GET_TIME_OBJ} from "../../consts/const.methods";
 
 @Component({
   selector: 'app-side-menu',
@@ -13,10 +15,8 @@ export class SideMenuComponent implements OnInit {
   @Input() stateListResponse: Mainland[] = [];
   private gasList: CheckItem[] = [];
   private mainlandsList: Mainland[] = [];
-  public last20Years: number[] = [];
-  public fromYearsOptions: number[] = [];
-  public toYearsOptions: number[] = [];
-  private selectedTime: SelectedTime;
+  public yearsList: number[] = [];
+  public timeSelectorModel: TimeSelectorModel;
 
 
   constructor() {
@@ -25,17 +25,13 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit() {
     this.setGasList(this.gasListResponse);
-    this.setStates(this.stateListResponse)
+    this.setStates(this.stateListResponse);
   }
 
   private setYearsSelection() {
-    const thisYear: number = new Date().getFullYear();
-    this.selectedTime = {from: thisYear, to: thisYear}
-    for (let i = thisYear; i >= (thisYear - 20); i--) {
-      this.last20Years.push(i);
-      this.toYearsOptions.push(i);
-      this.fromYearsOptions.push(i);
-    }
+    const timeObj = GET_TIME_OBJ();
+    this.yearsList = timeObj.yearsList;
+    this.timeSelectorModel = timeObj.timeSelectorModel;
   }
 
   private setGasList(list: CheckItem[]) {
@@ -110,7 +106,7 @@ export class SideMenuComponent implements OnInit {
     const submitItem: SubmitItem = {
       gases: [],
       states: [],
-      timeSelection: this.selectedTime
+      timeSelection: {from: this.timeSelectorModel.from.value , to: this.timeSelectorModel.to.value}
     };
 
     this.gasList.forEach((g: CheckItem) => {
@@ -129,14 +125,4 @@ export class SideMenuComponent implements OnInit {
     this.onSubmit.emit(submitItem);
     console.log("SUBMIT: ", submitItem);
   }
-
-  public onFromYearSelectionChanged() {
-    this.toYearsOptions = this.last20Years.filter(year => {if (year <= this.selectedTime.from) return year});
-    this.selectedTime.to = (this.selectedTime.to > this.selectedTime.from) ?  this.selectedTime.from : this.selectedTime.to;
-  }
-
-  public onToYearSelectionChanged() {
-    this.fromYearsOptions = this.last20Years.filter(year => {if (year >= this.selectedTime.to) return year})
-  }
-
 }

@@ -1,0 +1,18 @@
+<div class="selectedYears" [ngClass]="{'horizontal': isHorizontal}">
+  <label>from: </label>
+  <mat-select class="yearSelector"
+              placeholder="{{timeSelectorModel.from.value}}"
+              (selectionChange)="onFromYearSelectionChanged()"
+              [(value)]="timeSelectorModel.from.value">
+    <mat-option *ngFor="let year of timeSelectorModel.from.list" [value]="year">{{ year }}</mat-option>
+  </mat-select>
+</div>
+<div class="selectedYears" [ngClass]="{'horizontal': isHorizontal}">
+  <label>to: </label>
+  <mat-select class="yearSelector"
+              placeholder="{{timeSelectorModel.to.value}}"
+              (selectionChange)="onToYearSelectionChanged()"
+              [(value)]="timeSelectorModel.to.value">
+    <mat-option *ngFor="let year of timeSelectorModel.to.list" [value]="year">{{ year }}</mat-option>
+  </mat-select>
+</div>
