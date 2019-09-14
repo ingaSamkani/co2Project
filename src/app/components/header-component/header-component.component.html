@@ -1,6 +1,14 @@
 <div class="title-wrapper">
   <i class="material-icons md-dark menuIcon" (click)="onMenuIconClick()">menu</i>
   <label class="titleText">{{title}}</label>
+  <div class="view-options" *ngIf="selectedView !== 'none'">
+      <i class="material-icons md-dark view-option-item" 
+         (click)="onViewOptionClicked('grid')"
+         [ngClass]="{'selected': selectedView === 'grid'}">grid_on</i>
+      <i class="material-icons md-dark view-option-item" 
+         (click)="onViewOptionClicked('lineChart')"
+         [ngClass]="{'selected': selectedView === 'lineChart'}">bar_chart</i>
+  </div>
   <div class="navigators">
     <i class="material-icons md-dark navIcon_back" title="Back" *ngIf="backEnabled" (click)="onNavIconClicked(true)">arrow_back</i>
     <i class="material-icons md-dark navIcon_forward" title="Forward" *ngIf="forwardEnabled" (click)="onNavIconClicked(false)">arrow_forward</i>

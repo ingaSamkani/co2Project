@@ -21,6 +21,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { TimeSelectorComponent } from './components/time-selector/time-selector.component';
 import { ObjectPresenterComponent } from './components/grid/object-presentor/object-presenter.component';
 import { OperatorPipe } from './pipes/operator.pipe';
+import { ChartComponent } from './components/chart/chart';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { OperatorPipe } from './pipes/operator.pipe';
     ResultComponentComponent,
     PopupQueryComponent,
     GridComponent,
+    ChartComponent,
     TimeSelectorComponent,
     ObjectPresenterComponent,
     OperatorPipe
@@ -51,7 +53,7 @@ import { OperatorPipe } from './pipes/operator.pipe';
     MatSliderModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   entryComponents: [
     PopupQueryComponent

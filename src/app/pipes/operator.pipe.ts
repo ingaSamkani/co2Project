@@ -5,7 +5,6 @@ import {Operator} from "../models/models";
   name: 'operator'
 })
 export class OperatorPipe implements PipeTransform {
-  /*'gt'| 'lt' | 'eq'*/
   private translator = {
     gt: '>',
     lt: '<',

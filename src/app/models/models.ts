@@ -63,3 +63,5 @@ export type ComplexQuery = {
     to: number
   }
 }
+
+export type ViewOption = 'none' | 'grid' | 'lineChart';

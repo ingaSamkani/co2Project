@@ -1,5 +1,8 @@
 <div class="home-component-wrapper">
-  <app-header-component class="app-header-component" [title]="queryResults.length > 0 ?  queryResults[currentView].title : title"
+  <app-header-component class="app-header-component" 
+                        [title]="queryResults.length > 0 ?  queryResults[currentView].title : title"
+                        [selectedView]="queryResults.length > 0 ?  queryResults[currentView].selectedView : 'none'"
+                        (onViewOptionChanged)="onViewOptionChanged($event)"
                         (onMenuClick)="toggleMenu()"
                         (onNavClick)="onNavClicked($event)"
                         [backEnabled]="currentView > 0"
@@ -11,8 +14,10 @@
                  [gasListResponse]="gasList"
                  [stateListResponse]="statesList"
                  [ngClass]="{'slide-left-to-right': isMenuOpened && !isFirstLoad,
-                              'slide-right-to-left': !isMenuOpened && !isFirstLoad}"></app-side-menu>
+                             'slide-right-to-left': !isMenuOpened && !isFirstLoad}">
+  </app-side-menu>
   <app-result-component [queryData]="queryResults.length > 0 && queryResults[currentView].data"
+                        [selectedView]="queryResults.length > 0 && queryResults[currentView].selectedView"
                         [dataKeys]="gasList"
                         (onGeneralClick)="closeMenu()"
                         (onRequestForQuery)="onRequestForQuery($event)">

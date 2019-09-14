@@ -1,9 +1,21 @@
 <div class="result-page-wrapper" *ngIf="queryData" (click)="onPageClick()">
-  <div class="grid">
+  <div class="grid" *ngIf="selectedView === 'grid'">
     <app-grid [cols]="years"
               [rows]="states"
               [data]="queryData"
               [dataKeys]="dataKeys"
               (cellClicked)="onGridItemClicked($event)"></app-grid>
+  </div>
+  <div class="chart" *ngIf="selectedView === 'lineChart'">
+    <div class="chart-item">
+        <app-chart *ngFor="let gas of gases"
+        [gasType]="gas"
+        [states]="states"
+        [queryData]="queryData"
+        [years]="years"></app-chart>
+    </div>
+    <div class="states">
+      <div *ngFor="let state of states" [ngStyle]="{'color': getStateColor(state)}">{{state}}</div>
+    </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CheckItem, ComplexQuery, Mainland, Query, SubmitItem} from "../../models/models";
+import {CheckItem, ComplexQuery, Mainland, Query, SubmitItem, ViewOption} from "../../models/models";
 import {BackendGateService} from "../../services/backend-gate.service";
+import { configuration } from 'src/app/consts/consts';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import {BackendGateService} from "../../services/backend-gate.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public title: string = 'this is a title!!!';
+  public title: string = 'CO2 Emission';
   public isMenuOpened: boolean = false;
   public isFirstLoad: boolean = true;
   public showSpinner: number = 0;
@@ -25,6 +26,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.backendGateService.loadConfiguration().subscribe(
+      data => {
+        console.log("CONFIGURATION: ", data);
+        const keys: string[] = Object.keys(data);
+        keys.forEach(key => {
+          configuration[key] = data[key];
+        });
+      },
+        error => {
+          console.log("TEST error: ", error)
+        });
   }
 
   public toggleMenu() {
@@ -46,7 +58,11 @@ export class HomeComponent implements OnInit {
   private loadStateList() {
     this.showSpinner++;
     this.backendGateService.getStates().subscribe((data) => {
-        this.statesList = data as Mainland[];
+        this.statesList = [];
+        const keys: string[] = Object.keys(data);
+        keys.forEach(key => {
+            this.statesList.push(data[key]);
+        });
         this.showSpinner--;
       },
       err => {
@@ -62,7 +78,7 @@ export class HomeComponent implements OnInit {
           this.queryResults = this.queryResults.slice(0, this.currentView + 1);
         }
         this.currentView++;
-        this.queryResults.push({data, title: `query#${this.queriesCounter++}`});
+        this.queryResults.push({data, title: `query#${this.queriesCounter++}`,selectedView: 'grid'});
         console.log("getGasResults - DATA: ", data);
         this.showSpinner--;
       },
@@ -91,7 +107,7 @@ export class HomeComponent implements OnInit {
           this.queryResults = this.queryResults.slice(0, this.currentView + 1);
         }
         this.currentView++;
-        this.queryResults.push({data, title: `complex query#${this.complexQueriesCounter++}`});
+        this.queryResults.push({data, title: `complex query#${this.complexQueriesCounter++}`,selectedView: 'grid'});
         console.log("getGasResults - DATA: ", data);
         this.showSpinner--;
       },
@@ -99,6 +115,12 @@ export class HomeComponent implements OnInit {
         console.error("error", err);
           this.showSpinner--;
         });
+  }
+
+  public onViewOptionChanged($event: ViewOption) {
+    if (this.queryResults[this.currentView]) {
+      this.queryResults[this.currentView].selectedView = $event;
+    } 
   }
 }
 

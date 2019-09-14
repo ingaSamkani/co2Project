@@ -1,8 +1,12 @@
-<div class="object-presenter-wrapper">
+<div *ngIf="obj && keys" class="object-presenter-wrapper">
   <div class="data" *ngFor="let key of keys">
     <div *ngIf="obj[key.name]">
       <span class="key">{{key.name}}: </span>
       <span class="value">{{obj[key.name]}}</span>
     </div>
   </div>
+</div>
+
+<div *ngIf="!obj || !keys" class="object-presenter-wrapper">
+  <div>N/A</div>
 </div>

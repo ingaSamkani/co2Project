@@ -4,11 +4,31 @@
   height: calc(100% - 50px);
   overflow: scroll;
 
-  .grid {
+  .grid, .chart {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-top: $header-height;
+  }
+
+  .chart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: $header-height;
+  }
+  .states {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 30px;
+    top: 10%;
+    background-color: $general-background;
+    border: 2px solid $main-background;
+    padding: 30px;
   }
 }

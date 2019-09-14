@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {CheckItem, Mainland, SelectedTime, SubmitItem, TimeSelectorModel} from "../../models/models";
-import {YEARS_BACK} from "../../consts/consts";
 import {GET_TIME_OBJ} from "../../consts/const.methods";
 
 @Component({
